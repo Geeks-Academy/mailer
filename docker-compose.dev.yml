@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+
+  # ui:
+  #   container_name: ui
+  #   build: ./ui
+  #   stdin_open: true
+    
+  #   volumes:
+  #     - ./ui:/app
+  #     - ./shared:/app/shared
+  #     - ./shared:/app/src/shared
+
+  #   depends_on: 
+  #     - mjml
+  #     - email_service
+
+  #   ports:
+  #     - "3000:3000"
+  #     - "8080:5000"
+    
+  #   networks:
+  #     net:
+
+
+  mjml:
+    container_name: mjml
+    build: ./mjml
+
+    volumes:
+      - ./mjml:/app
+      - ./shared:/app/shared
+
+    ports:
+      - "3001:3000"
+    
+    networks:
+      net:
+
+
+  email:
+    container_name: email
+    build: ./email
+
+    volumes:
+      - ./email:/app
+      - ./shared:/app/shared
+
+    ports:
+      - "5000:5000"
+    
+    networks:
+      net:
+
+
+    
+networks:
+  net:
+    external: true
