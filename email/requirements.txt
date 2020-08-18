@@ -2,3 +2,6 @@ requests
 Flask
 Flask-APScheduler
 SQLAlchemy
+python-dotenv
+eventlet
+celery
