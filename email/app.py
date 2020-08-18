@@ -9,10 +9,6 @@ from mjml_service.handler import MJMLHandler
 from service_ip import save_ip_for_service, get_ip_for_service
 
 
-
-
-
-
 app = Flask(__name__)
 
 @app.route('/')
