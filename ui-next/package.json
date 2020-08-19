@@ -1,0 +1,41 @@
+{
+  "name": "ui-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "xo"
+  },
+  "dependencies": {
+    "grapesjs": "^0.16.18",
+    "grapesjs-mjml": "^0.2.4",
+    "mjml-core": "^4.6.3",
+    "next": "9.5.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.46",
+    "eslint-config-xo": "^0.32.1",
+    "eslint-config-xo-react": "^0.23.0",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "xo": "^0.33.0"
+  },
+  "xo": {
+    "prettier": true,
+    "env": [
+      "es2020",
+      "node",
+      "browser"
+    ],
+    "extends": "xo-react",
+    "rules": {
+      "unicorn/filename-case": 0,
+      "react/react-in-jsx-scope": 0,
+      "react/prop-types": 0
+    }
+  }
+}
