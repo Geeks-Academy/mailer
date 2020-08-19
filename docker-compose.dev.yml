@@ -27,11 +27,9 @@ services:
   mjml:
     container_name: mjml
     build: ./mjml
-
     volumes:
       - ./mjml:/app
       - ./shared:/app/shared
-
     ports:
       - "3001:3000"
     
@@ -42,16 +40,44 @@ services:
   email:
     container_name: email
     build: ./email
-
     volumes:
       - ./email:/app
       - ./shared:/app/shared
-
     ports:
       - "5000:5000"
-    
     networks:
       net:
+    links:
+      - rabbitmq
+    depends_on: 
+      - worker
+      - rabbitmq
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:latest 
+    hostname: rabbitmq
+    networks: 
+      net:
+    ports:
+      - 5672:5672
+      
+
+  worker:
+    build:
+      context: ./email
+    hostname: worker
+    entrypoint: celery
+    command: -A app.celery_app worker --pool=eventlet
+    volumes: 
+      - ./email:/app
+    networks: 
+      net:
+    links: 
+      - rabbitmq
+    depends_on: 
+      - rabbitmq
+    
 
 
     
