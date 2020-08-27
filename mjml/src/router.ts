@@ -14,7 +14,7 @@ router.get('/', (req: Request, res: Response) => {
 // find template by templateName, and fill with templateVariables
 router.post('/convert', (req: Request, res: Response) => {
     try {
-        const { templateName='test', templateVariables = { title: 'test' } } = req.body
+        const { templateName='template', templateVariables = { title: 'test' } } = req.body
 
         const templateMjml = readFileSync(`${__dirname}/templates/${templateName}.mjml`).toLocaleString()
         let templateHtml = mjml(templateMjml).html

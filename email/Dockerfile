@@ -3,12 +3,12 @@ COPY . ./app
 WORKDIR /app
 
 # Install dependencies:
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
 # Run the application:
-RUN ls
-RUN pip list
+# RUN ls
+# RUN pip list
 
 EXPOSE 5000
 ENTRYPOINT [ "python3", "app.py" ] 

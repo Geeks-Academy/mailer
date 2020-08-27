@@ -2,7 +2,7 @@ FROM node:14.5-alpine
 ADD . ./app
 WORKDIR /app
 # ENV PATH /app/node_modules/.bin:$PATH
-RUN ls -a 
+# RUN ls -a 
 
 # Install dependencies:
 # RUN npm install -g typescript 
@@ -11,8 +11,8 @@ RUN npm install serve --silent
 
 # RUN npm install -g react-scripts --silent
 # RUN npm install --silent
-RUN node --version
-RUN npm --version
+# RUN node --version
+# RUN npm --version
 
 RUN chmod +x ./run.sh
 
