@@ -7,12 +7,12 @@ import socket
 import requests
 
 
-def MJMLHandler_converter(ip, template_name='beforeLiveCodeReview'):
+def MJMLHandler_converter(template_name='beforeLiveCodeReview'):
     data = {
         'templateName':template_name,
         'templateVariables': {'title':'TYTUŁ POSTA'}
     }
-    MJML_IP = f'http://{ip}:3000/convert'
+    MJML_IP = f'http://mjml:3001/convert'
     try:
         resp = requests.post(MJML_IP,  json=data)
         return resp.json()

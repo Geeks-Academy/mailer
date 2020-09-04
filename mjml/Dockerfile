@@ -2,13 +2,13 @@ FROM node:14.5-alpine
 ADD . ./app
 WORKDIR /app
 
-RUN ls -a 
+# RUN ls -a 
 
 # Install dependencies:
-RUN npm install -g typescript 
-RUN npm install -g ts-node
-RUN npm install -g nodemon
-RUN npm install
+RUN npm install -g typescript \
+    && npm install -g ts-node \
+    && npm install -g nodemon \
+    && npm install
 # RUN chmod +x ./*
 
 EXPOSE 3000

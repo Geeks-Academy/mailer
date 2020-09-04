@@ -11,21 +11,22 @@ from service_ip import save_ip_for_service, get_ip_for_service
 
 app = Flask(__name__)
 app.config.update(
-    CELERY_BROKER_URL='amqp://rabbitmq:5672',
-    CELERY_RESULT_BACKEND='amqp://rabbitmq:5672'
+    CELERY_BROKER_URL='amqp://localhost:5672',
+    CELERY_RESULT_BACKEND='amqp://localhost:5672'
 )
 
 celery_app = make_celery(app)
 
-@celery_app.task(name='tasks.apptask')
-def send_emails(recipients):
+@celery_app.task(name='send_emails')
+def send_emails(recipients, templet_name='template'):
     _sender = EmailSender(STMPConfig)
     _sender.connect()
 
     for idx, recipient in enumerate(recipients, 1):
         # converted_mail = service.convert(templateName, variables)
-
-        res_email = _sender.send_mail(recipients=recipients) #, html=data['templateHtml'])
+        email = MJMLHandler_converter(templet_name) # templet_name jako variable
+        res_email = _sender.send_mail(recipients=recipients, html=email['templateHtml']) #, html=data['templateHtml'])
+            
         print('sent', idx,  '/', len(recipients))            
     
     _sender.disconnect()
@@ -41,13 +42,14 @@ def index():
 def send_email():
     # pobierac recipients i variables z post body bo to array emaili
     recipients = ['test@gmail.com']
-    templateName = 'test'
+    templateName = 'template'
     variables = [{'exampleGithubLogin':'Tester mikroserwisu'}]
 
-    # service = MJMLHandler_converter(get_ip_for_service('mjml')['ip'])
+    
+    
     # trzeba sprawdzić jak działa
     
-    result = send_emails.delay(recipients=recipients)
+    result = send_emails.delay(recipients=recipients, templet_name=templateName)
     result.wait()
     # sprawdz czy wpadło coś do kolejki jeśli tak to wykonaj
 

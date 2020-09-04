@@ -27,6 +27,7 @@ services:
   mjml:
     container_name: mjml
     build: ./mjml
+    hostname: mjml
     volumes:
       - ./mjml:/app
       - ./shared:/app/shared
@@ -39,6 +40,7 @@ services:
 
   email:
     container_name: email
+    hostname: email
     build: ./email
     volumes:
       - ./email:/app
@@ -78,7 +80,21 @@ services:
     depends_on: 
       - rabbitmq
     
-
+  # ui:
+  #   container_name: ui
+  #   build: ./ui-next
+  #   volumes:
+  #     - ./ui-next:/app
+  #     - ./shared:/app/shared
+  #     - ./shared:/app/api/shared
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - "MJML_IP=mjml"
+  #     - "SHEETS_IP=sheets"
+  #   depends_on:
+  #     - mjml
+  #     - sheets
 
     
 networks:
